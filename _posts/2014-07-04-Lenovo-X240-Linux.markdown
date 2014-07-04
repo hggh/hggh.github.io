@@ -20,5 +20,5 @@ With the new kernel and the new video driver you can use two 24" external screen
  * connect one 24" screen to the Display Port on the left side of the notebook
  * disable the internal laptop screen
 
-The LTE/UTMS modem (Sierra Gobi5000) works with kernel 3.15 out of the box. I using Network Manager in XFCE to establish a network connection.
+The LTE/UTMS modem (Sierra Gobi5000) works with kernel 3.15 out of the box. I'm using Network Manager in XFCE to establish a network connection.
 
