@@ -1,0 +1,5 @@
+name: Jonas Genannt
+url: http://blog.brachium-system.net
+markdown: redcarpet
+pygments: true
+exclude: [ 'CNAME' ]
