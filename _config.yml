@@ -2,4 +2,4 @@ name: Jonas Genannt
 url: http://blog.brachium-system.net
 markdown: redcarpet
 highlighter: true
-exclude: [ 'CNAME' ]
+exclude: [ 'CNAME', 'Rakefile', 'Gemfile.lock', 'Gemfile' ]
