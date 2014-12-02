@@ -158,3 +158,36 @@ a:visited { color: #a0a; }
 .post pre.terminal code {
   background-color: #333;
 }
+
+.image-link {
+  display:inline-block;
+  padding:4px;
+  margin:0 0.5rem 1rem 0.5rem;
+  background-color:#fff;
+  line-height:0;
+  -webkit-border-radius:6px;
+  -moz-border-radius:6px;
+  -ms-border-radius:6px;
+  -o-border-radius:6px;
+  border-radius:6px;
+  -webkit-transition:background-color 0.5s ease-out;
+  -moz-transition:background-color 0.5s ease-out;
+  -o-transition:background-color 0.5s ease-out;
+  transition:background-color 0.5s ease-out
+}
+
+.image-link:hover {
+  background-color:#4ae;
+  -webkit-transition:background-color 0;
+  -moz-transition:background-color 0;
+  -o-transition:background-color 0;
+  transition:background-color 0
+}
+
+.image-thumb {
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  -ms-border-radius:5px;
+  -o-border-radius:5px;
+  border-radius:5px
+}
