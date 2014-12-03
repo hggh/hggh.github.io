@@ -4,7 +4,17 @@ include Magick
 
 desc 'build page'
 task :build do
-  %x{jekyll build}
+  puts %x{jekyll build}
+end
+
+GENERATED_BLOG='/home/jonas/entwicklung/generated_hggh.github.io/'
+
+desc 'sync build page to directory for commit and upload'
+task :sync do
+  unless File.directory?(GENERATED_BLOG)
+    raise "Could not access generated blog at #{GENERATED_BLOG}"
+  end
+  puts %x{rsync -av --delete --exclude CNAME --exclude .git _site/ #{GENERATED_BLOG}}
 end
 
 desc 'resize orginal pics'
