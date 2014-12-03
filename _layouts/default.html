@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ page.title }}</title>
-        <meta name="viewport" content="width=device-width">
 
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
 
         <!-- Custom CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="/css/main.css">
 
         <link rel="stylesheet" href="/css/lightbox.css">
@@ -18,8 +19,7 @@
 
         <div class="site">
           <div class="header">
-            <h1 class="title"><a href="/">{{ site.name }}</a></h1>
-            <a class="extra" href="/">home</a>
+            <h1 class="title"><a href="/">home</a></h1>
           </div>
 
           {{ content }}
@@ -40,5 +40,6 @@
         </div>
     <script src="/js/jquery-1.11.0.min.js"></script>
     <script src="/js/lightbox.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     </body>
 </html>
