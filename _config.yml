@@ -1,5 +1,5 @@
 name: Jonas Genannt
-url: http://blog.brachium-system.net
+url: http://hggh.github.io
 markdown: redcarpet
 highlighter: true
 exclude: [ 'CNAME', 'Rakefile', 'Gemfile.lock', 'Gemfile' ]
