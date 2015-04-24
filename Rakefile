@@ -1,5 +1,5 @@
 require 'rake'
-require 'RMagick'
+require 'rmagick'
 include Magick
 
 desc 'build page'
