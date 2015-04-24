@@ -1,5 +1,6 @@
 name: Jonas Genannt
 url: http://hggh.github.io
+description: 'yet another useless blog'
 markdown: redcarpet
 highlighter: true
 exclude: [ 'CNAME', 'Rakefile', 'Gemfile.lock', 'Gemfile' ]
