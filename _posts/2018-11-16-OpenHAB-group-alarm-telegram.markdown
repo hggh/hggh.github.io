@@ -12,7 +12,7 @@ categories: openhab2
 
 This is my ``items`` configuration:
 
-{% highlight bash %}
+{% highlight java %}
 Group indoor_temperature
 Number:Temperature BME280_52_Temperature "Temperatur Indoor [%.1f °C]" <temperature> (indoor_temperature) {expire="90m, 0"}
 Number:Temperature BME280_54_Temperature "Temperatur Indoor [%.1f °C]" <temperature>  (indoor_temperature) {expire="90m, 0"}
@@ -26,13 +26,13 @@ The idea was that the threshold could be configured via the ``items`` file or wi
 
 To work with groups I had to create two new groups to group the ``Switch Item`` if the alarm is active and the threshold of every sensor:
 
-{% highlight bash %}
+{% highlight java %}
 Group indoor_temperature_alarm
 Group indoor_temperature_alarm_threshold
 {% endhighlight %}
 
 For every temperature sensor I need a Switch Item and a String Item that hold the information:
-{% highlight bash %}
+{% highlight java %}
 Switch BME280_54_Temperature_Alarm "Küche Temperaturalarm" (indoor_temperature_alarm)
 String BME280_54_Temperature_Alarm_Threshold "18" (indoor_temperature_alarm_threshold)
 {% endhighlight %}
@@ -40,7 +40,7 @@ String BME280_54_Temperature_Alarm_Threshold "18" (indoor_temperature_alarm_thre
 We have **set** the threshold for the **kitchen at 18°C**!
 
 At first we need a rule to set the alarm switch on and off:
-{% highlight bash %}
+{% highlight java %}
 rule "indoor_temperature below"
 when
 	Member of indoor_temperature received update
@@ -62,7 +62,7 @@ end
 
 Now the state of the alarm is set to the Switch Item of every sensor. Let's now send a Telegram message:
 
-{% highlight bash %}
+{% highlight js %}
 rule "indoor_temperature_alarm changed"
 when
 	Member of indoor_temperature_alarm changed
