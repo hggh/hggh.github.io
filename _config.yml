@@ -3,4 +3,5 @@ url: http://hggh.github.io
 description: 'yet another useless blog'
 markdown: redcarpet
 highlighter: true
+destination: ./build
 exclude: [ 'CNAME', 'Rakefile', 'Gemfile.lock', 'Gemfile' ]
