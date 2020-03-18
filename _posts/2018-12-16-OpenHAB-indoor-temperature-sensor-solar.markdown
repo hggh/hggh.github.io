@@ -38,11 +38,11 @@ To monitor the voltage, the sensor reads every hour the voltage from the superca
 
 After sunset the power from the supercap is used. Also the device stays stable if there is no sunlight at all for three days.
 
-Source code/pcb/stl is located at Github: [https://github.com/hggh/indoor-atmel-328-bme280]
+Source code/pcb/stl is located at Github: [https://github.com/hggh/indoor-temperature-sensor]
 
 A CR2032 battery can also be used. I used it to test the sensor before switching to solar panels. I have now two solar powered sensors.
 
 
 
-[https://github.com/hggh/indoor-atmel-328-bme280]: https://github.com/hggh/indoor-atmel-328-bme280
+[https://github.com/hggh/indoor-temperature-sensor]: https://github.com/hggh/indoor-temperature-sensor
 
