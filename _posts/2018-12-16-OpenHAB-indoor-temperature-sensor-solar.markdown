@@ -5,6 +5,7 @@ date:   2018-12-16 11:12:20
 categories: openhab2
 ---
 
+
 The idea was to create a low power wireless sensor for monitoring
 
  * temperature
