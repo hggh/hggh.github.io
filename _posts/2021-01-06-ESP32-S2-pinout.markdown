@@ -7,8 +7,9 @@ categories: esp32
 
 special (possible not usable) pins on ESP32 S2 WROOM:
 
++---------+----------+----+
 | Name | function | note |
-|------|--------|---------|---|
++=====+==========+======+
 | IO  0 | RTC_GPIO0, GPIO0 | boot option |
 | IO 15 | RTC_GPIO15, GPIO15, U0RTS, ADC2_CH4, XTAL_32K_P | optional external 32.768KHz crystal | 
 | IO 16 | RTC_GPIO16, GPIO16, U0CTS, ADC2_CH5, XTAL_32K_N | optional external 32.768KHz crystal |
@@ -18,3 +19,4 @@ special (possible not usable) pins on ESP32 S2 WROOM:
 | IO 26 | SPICS1, GPIO26 | internal PSRAM connection, not usable |
 | IO 45 | GPIO45 | strapping pin, see datasheet |
 | IO 46 | GPIO46 | Input only, strapping pin, see datasheet |
++---------+----------+----+
