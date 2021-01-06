@@ -1,0 +1,20 @@
+---
+layout: post
+title:  "ESP32 S2 WROOM pinout reference"
+date:   2021-01-06 14:46:20
+categories: esp32
+---
+
+special (possible not usable) pins on ESP32 S2 WROOM:
+
+| Name | function | note |
+|------|--------|---------|---|
+| IO  0 | RTC_GPIO0, GPIO0 | boot option |
+| IO 15 | RTC_GPIO15, GPIO15, U0RTS, ADC2_CH4, XTAL_32K_P | optional external 32.768KHz crystal | 
+| IO 16 | RTC_GPIO16, GPIO16, U0CTS, ADC2_CH5, XTAL_32K_N | optional external 32.768KHz crystal |
+| IO 18 | RTC_GPIO18, GPIO18, U1RXD, ADC2_CH7, DAC_2, CLK_OUT3 | pullup with VDD, my affect chip's entry into download boot mode |
+| IO 19 | RTC_GPIO19, GPIO19, U1RTS, ADC2_CH8, CLK_OUT2, USB_D- | USB OTG |
+| IO 20 | RTC_GPIO20, GPIO20, U1CTS, ADC2_CH9, CLK_OUT1, USB_D+ | USB OTG |
+| IO 26 | SPICS1, GPIO26 | internal PSRAM connection, not usable |
+| IO 45 | GPIO45 | strapping pin, see datasheet |
+| IO 46 | GPIO46 | Input only, strapping pin, see datasheet |
