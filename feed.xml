@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+	<channel>
+		<title>Jonas Genannt</title>
+		<description>yet another useless blog</description>		
+		<link>https://hggh.github.io</link>
+		<atom:link href="https://hggh.github.io/feed.xml" rel="self" type="application/rss+xml" />
+		
+			<item>
+				<title>ESP32 S2 WROOM pinout reference</title>
+				        
+				
+					<description>&lt;p&gt;special (possible not usable) pins on ESP32 S2 WROOM:
+&lt;pre&gt;
++---------+----------+----+
+| Name | function | note |
++=====+==========+======+
+| IO  0 | RTC&lt;em&gt;GPIO0, GPIO0 | boot option |
+| IO  2 | ?no output to high? | |
+| IO  5 | ?no input? | |
+| IO 15 | RTC&lt;/em&gt;GPIO15, GPIO15, U0RTS, ADC2&lt;em&gt;CH4, XTAL&lt;/em&gt;32K&lt;em&gt;P | optional external 32.768KHz crystal | 
+| IO 16 | RTC&lt;/em&gt;GPIO16, GPIO16, U0CTS, ADC2&lt;em&gt;CH5, XTAL&lt;/em&gt;32K&lt;em&gt;N | optional external 32.768KHz crystal |
+| IO 18 | RTC&lt;/em&gt;GPIO18, GPIO18, U1RXD, ADC2&lt;em&gt;CH7, DAC&lt;/em&gt;2, CLK&lt;em&gt;OUT3 | pullup with VDD, my affect chip&amp;#39;s entry into download boot mode |
+| IO 19 | RTC&lt;/em&gt;GPIO19, GPIO19, U1RTS, ADC2&lt;em&gt;CH8, CLK&lt;/em&gt;OUT2, USB&lt;em&gt;D- | USB OTG |
+| IO 20 | RTC&lt;/em&gt;GPIO20, GPIO20, U1CTS, ADC2&lt;em&gt;CH9, CLK&lt;/em&gt;OUT1, USB_D+ | USB OTG |
+| IO 26 | SPICS1, GPIO26 | internal PSRAM connection, not usable |
+| IO 45 | GPIO45 | strapping pin, see datasheet |
+| IO 46 | GPIO46 | Input only, strapping pin, see datasheet |
++---------+----------+----+
+&lt;/pre&gt;&lt;/p&gt;
+</description>
+				
+				<pubDate>Wed, 06 Jan 2021 12:46:20 +0000</pubDate>
+				<link>https://hggh.github.io/esp32/2021/01/06/ESP32-S2-pinout.html</link>
+				<guid isPermaLink="true">https://hggh.github.io/esp32/2021/01/06/ESP32-S2-pinout.html</guid>
+			</item>
+		
+			<item>
+				<title>Telekom Glasfaser with Linux with dual stack and IPv6 prefix delegation</title>
+				        
+				
+					<description>&lt;p&gt;Telekom Glasfaser Internet access works very well with Linux. You have to use ppp with pppoe.&lt;/p&gt;
+</description>
+				
+				<pubDate>Sun, 16 Dec 2018 11:12:20 +0000</pubDate>
+				<link>https://hggh.github.io/telekom/pppoe/2018/12/16/Telekom-Glasfaser-ppp-ppoe.html</link>
+				<guid isPermaLink="true">https://hggh.github.io/telekom/pppoe/2018/12/16/Telekom-Glasfaser-ppp-ppoe.html</guid>
+			</item>
+		
+			<item>
+				<title>OpenHAB2 - solar low power BME280 wireless sensor with RFM69</title>
+				        
+				
+					<description>&lt;p&gt;The idea was to create a low power wireless sensor for monitoring&lt;/p&gt;
+</description>
+				
+				<pubDate>Sun, 16 Dec 2018 11:12:20 +0000</pubDate>
+				<link>https://hggh.github.io/openhab2/2018/12/16/OpenHAB-indoor-temperature-sensor-solar.html</link>
+				<guid isPermaLink="true">https://hggh.github.io/openhab2/2018/12/16/OpenHAB-indoor-temperature-sensor-solar.html</guid>
+			</item>
+		
+			<item>
+				<title>OpenHAB2 - temperature alarm via groups and a Telegram bot</title>
+				        
+				
+					<description>&lt;p&gt;&lt;a href=&quot;https://openhab.org&quot;&gt;OpenHAB2&lt;/a&gt; is a great tool. I have a several BME280 inside my flat. They are monitoring my sleeping room, living room and my kitchen.&lt;/p&gt;
+</description>
+				
+				<pubDate>Mon, 19 Nov 2018 15:54:20 +0000</pubDate>
+				<link>https://hggh.github.io/openhab2/2018/11/19/OpenHAB-group-alarm-telegram.html</link>
+				<guid isPermaLink="true">https://hggh.github.io/openhab2/2018/11/19/OpenHAB-group-alarm-telegram.html</guid>
+			</item>
+		
+			<item>
+				<title>Puppet - our journey from Puppet 3.8 to Puppet 4</title>
+				        
+				
+					<description>&lt;p&gt;the last months we at &lt;a href=&quot;https://www.globalways.net&quot;&gt;Globalways&lt;/a&gt; managed to upgrade our puppet infrastructure from Puppet 3.8 to Puppet 4.x.&lt;/p&gt;
+</description>
+				
+				<pubDate>Fri, 19 Aug 2016 12:55:45 +0000</pubDate>
+				<link>https://hggh.github.io/puppet/debian/2016/08/19/puppet-4.x.html</link>
+				<guid isPermaLink="true">https://hggh.github.io/puppet/debian/2016/08/19/puppet-4.x.html</guid>
+			</item>
+		
+			<item>
+				<title>Puppet - profiles with support of different module versions</title>
+				        
+				
+					<description>&lt;p&gt;At Globalways we are using the profile / roles layout for our puppet infrastructure.&lt;/p&gt;
+</description>
+				
+				<pubDate>Wed, 17 Aug 2016 12:55:45 +0000</pubDate>
+				<link>https://hggh.github.io/puppet/debian/2016/08/17/puppet-profile-different-module-versions.html</link>
+				<guid isPermaLink="true">https://hggh.github.io/puppet/debian/2016/08/17/puppet-profile-different-module-versions.html</guid>
+			</item>
+		
+			<item>
+				<title>good startup idea: sell winter boots</title>
+				        
+				
+					<description>&lt;p&gt;good startup idea: sell winter boots and winter gloves when it&amp;#39;s 33° C and around 75% humidity.&lt;/p&gt;
+</description>
+				
+				<pubDate>Fri, 12 Dec 2014 15:55:45 +0000</pubDate>
+				<link>https://hggh.github.io/journey/2014/12/12/winter-boots.html</link>
+				<guid isPermaLink="true">https://hggh.github.io/journey/2014/12/12/winter-boots.html</guid>
+			</item>
+		
+			<item>
+				<title>always secure your sunblocker</title>
+				        
+				
+					<description>&lt;p&gt;always secure your sunblocker in your backpack while flying...&lt;/p&gt;
+</description>
+				
+				<pubDate>Wed, 10 Dec 2014 12:58:45 +0000</pubDate>
+				<link>https://hggh.github.io/journey/2014/12/10/sunblocker.html</link>
+				<guid isPermaLink="true">https://hggh.github.io/journey/2014/12/10/sunblocker.html</guid>
+			</item>
+		
+			<item>
+				<title>Sunset St Kilda beach, Melbourne</title>
+				        
+				
+					<description>&lt;p&gt;sunset St kilda beach, Melbourne&lt;/p&gt;
+</description>
+				
+				<pubDate>Mon, 08 Dec 2014 22:38:23 +0000</pubDate>
+				<link>https://hggh.github.io/journey/2014/12/08/sunset.html</link>
+				<guid isPermaLink="true">https://hggh.github.io/journey/2014/12/08/sunset.html</guid>
+			</item>
+		
+			<item>
+				<title>Jekyll plugin for Lightbox2 with thumbnails</title>
+				        
+				
+					<description>&lt;p&gt;&lt;a href=&quot;http://lokeshdhakar.com/projects/lightbox2/&quot;&gt;lightbox2&lt;/a&gt; with Jekyll. I have written a &lt;a href=&quot;https://github.com/hggh/hggh.github.io/blob/jekll/_plugins/image_gallery_tag.rb&quot;&gt;small plugin&lt;/a&gt; for Jekyll.&lt;/p&gt;
+</description>
+				
+				<pubDate>Tue, 02 Dec 2014 22:38:23 +0000</pubDate>
+				<link>https://hggh.github.io/jekyll/lightbox2/2014/12/02/jekyll-plugin.html</link>
+				<guid isPermaLink="true">https://hggh.github.io/jekyll/lightbox2/2014/12/02/jekyll-plugin.html</guid>
+			</item>
+		
+	</channel>
+</rss>

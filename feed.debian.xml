@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Jonas Genannt - Debian</title>
+		<description>debian related posts</description>
+		<link>https://hggh.github.io</link>
+		<atom:link href="https://hggh.github.io/feed.category.xml" rel="self" type="application/rss+xml" />
+		
+			<item>
+				<title>Puppet - our journey from Puppet 3.8 to Puppet 4</title>
+				
+					<description>&lt;p&gt;the last months we at &lt;a href=&quot;https://www.globalways.net&quot;&gt;Globalways&lt;/a&gt; managed to upgrade our puppet infrastructure from Puppet 3.8 to Puppet 4.x.&lt;/p&gt;
+</description>
+				
+				<pubDate>Fri, 19 Aug 2016 12:55:45 +0000</pubDate>
+				<link>https://hggh.github.io/puppet/debian/2016/08/19/puppet-4.x.html</link>
+				<guid isPermaLink="true">https://hggh.github.io/puppet/debian/2016/08/19/puppet-4.x.html</guid>
+			</item>
+		
+			<item>
+				<title>Puppet - profiles with support of different module versions</title>
+				
+					<description>&lt;p&gt;At Globalways we are using the profile / roles layout for our puppet infrastructure.&lt;/p&gt;
+</description>
+				
+				<pubDate>Wed, 17 Aug 2016 12:55:45 +0000</pubDate>
+				<link>https://hggh.github.io/puppet/debian/2016/08/17/puppet-profile-different-module-versions.html</link>
+				<guid isPermaLink="true">https://hggh.github.io/puppet/debian/2016/08/17/puppet-profile-different-module-versions.html</guid>
+			</item>
+		
+			<item>
+				<title>Lenovo X240 with Linux</title>
+				
+					<description>&lt;p&gt;The new Lenovo X240 notebook/ultrabook works great with Linux. I have installed Debian Wheezy 64bit.&lt;/p&gt;
+</description>
+				
+				<pubDate>Fri, 04 Jul 2014 08:13:39 +0000</pubDate>
+				<link>https://hggh.github.io/debian/lenovo/x240/2014/07/04/Lenovo-X240-Linux.html</link>
+				<guid isPermaLink="true">https://hggh.github.io/debian/lenovo/x240/2014/07/04/Lenovo-X240-Linux.html</guid>
+			</item>
+		
+	</channel>
+</rss>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base href="https://hggh.github.io">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Puppet - our journey from Puppet 3.8 to Puppet 4</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/main.css">
+
+        <link rel="stylesheet" href="/css/lightbox.css">
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">home</a></h1>
+          </div>
+
+          <h2>Puppet - our journey from Puppet 3.8 to Puppet 4</h2>
+<p class="meta">19 Aug 2016</p>
+
+<div class="post">
+<p>the last months we at <a href="https://www.globalways.net">Globalways</a> managed to upgrade our puppet infrastructure from Puppet 3.8 to Puppet 4.x.</p>
+
+<p>we did that task in small steps:</p>
+
+<ul>
+<li>trusted_node_data = true on Puppet 3.8</li>
+<li>stringify_facts = false on Puppet 3.8</li>
+<li>set parser = future on Puppet 3.8</li>
+<li>add datatypes to our profiles</li>
+<li>Puppet 4.6</li>
+<li>future plan: strict_variables = true, agent upgrades</li>
+</ul>
+
+<p>we are using a strict profiles and roles layout. our profiles are shared all over the different customer environments.</p>
+
+<h2>trusted_node_data = true</h2>
+
+<p>this step was easy, we enabled it, and started to use the $facts variable on new code. the $facts variable is also
+important for our next big step strict_variables = true.</p>
+
+<p>if you have facts that are not available on all your systems you can&#39;t use code like this:</p>
+
+<div class="highlight"><pre><code class="language-puppet" data-lang="puppet">if ($foobar == true) {
+}</code></pre></div>
+
+<p>you have to use the has_key from stdlibs:</p>
+
+<div class="highlight"><pre><code class="language-puppet" data-lang="puppet">if (has_key($facts, &#39;foobar&#39;) &amp;&amp; $facts[&#39;foobar&#39;] == true) {
+}</code></pre></div>
+
+<h2>stringify_facts = false</h2>
+
+<p>for this setting we updated several modules from the forge to the newest version. also we had to update some of your internal profiles
+to query boolean facts in the correct way.</p>
+
+<p>to have puppet code that is usable with stringify_facts = false and true, you have to use code like this:</p>
+
+<div class="highlight"><pre><code class="language-puppet" data-lang="puppet">if (str2bool(&quot;${::is_virtual}&quot;) == true) {
+}</code></pre></div>
+
+<h2>parser = future</h2>
+
+<p>this step took longer than we expected. we updated several modules from the forge to support the future parser. also we submitted the following PRs:</p>
+
+<ul>
+<li>graylog_collector (#<a href="https://github.com/joshbeard/puppet-graylog_collector/pull/7">PR7</a>)</li>
+<li>keepalived (#<a href="https://github.com/arioch/puppet-keepalived/pull/90">PR90</a>)</li>
+<li>puppetlabs-mongodb (#<a href="https://github.com/puppetlabs/puppetlabs-mongodb/pull/275">PR275</a>)</li>
+<li>tac_plus (#<a href="https://github.com/fxcm/sethlyons-tac_plus/pull/7">tac-PR7</a>)</li>
+<li>puppetlabs-tomcat (#<a href="https://github.com/puppetlabs/puppetlabs-tomcat/pull/161">tomcat-PR161</a>)</li>
+<li>graylog_collector (#<a href="https://github.com/joshbeard/puppet-graylog_collector/pull/8">PR8</a>)</li>
+</ul>
+
+<p>we had some dependency problems on our internal profiles that was fixed very easy. we enabled the future parser per environment, did our tests and moved to
+our next environment.</p>
+
+<h2>datatypes on our profiles</h2>
+
+<p>after we had done the big step forward with the future parser on Puppet 3.8 we really enjoyed the nice possibilities of the future parser.</p>
+
+<p>we started adding data types to all our profiles, this change also ensured that our hiera yamls getting better:</p>
+
+<ul>
+<li>changed &#39;true&#39; to a boolean true</li>
+<li>changed &#39;1337&#39; to a integer value</li>
+</ul>
+
+<p>we removed some of our &#39;array&#39; defines and replaced it with <strong>.each</strong>. (That&#39;s cool - less code for the same!)</p>
+
+<p>on new written profiles we also heavily using the star operator ( * =&gt; $hash) to parse a hash to a Class or Define. </p>
+
+<h2>Puppet 4.6</h2>
+
+<p>after doing all that work we added a extra server to our Puppet infrastructure with Puppet 4.6 (with Puppet Server) and updated our Git hooks to deploy
+our manifests to all our Puppet servers (3.8 and 4.x). Now we are able to change every node or environment to the new Puppet 4.x server.</p>
+
+<p>Currently we are using Puppet Agent 3.8 backports on all our servers (mainly Ubuntu 12.04, 14.04, 16.04 and some Jessie boxes). </p>
+
+<p>Update: we are just waiting for Puppet 4.6.1 to fix some variable scoping regressions in Puppet 4.6.0 , to move all servers to Puppet 4.x</p>
+
+<h3>Puppet Server</h3>
+
+<p>since the Puppet Server is Jruby, we have to manage to get trocla working with JRuby. We are using Sequel with postgres inside trocla. That&#39;s why we need to install
+gems via Puppet Server:</p>
+
+<div class="highlight"><pre><code class="language-trocla" data-lang="trocla">/opt/puppetlabs/bin/puppetserver gem install pg_jruby --no-ri --no-rdoc
+/opt/puppetlabs/bin/puppetserver gem install moneta --no-ri --no-rdoc
+/opt/puppetlabs/bin/puppetserver gem install sequel --no-ri --no-rdoc
+/opt/puppetlabs/bin/puppetserver gem install trocla --no-ri --no-rdoc</code></pre></div>
+
+<p>we also symlinked /etc/puppetlabs/code/environments to /etc/puppet/environments because our r10k config should work on 3.8 and 4.x. After we switched off the Puppet 3.8 servers we plan to
+migrate our r10k config to the new location. But thanks to Puppetlabs the symlinks works :-)</p>
+
+<p>Also you <em>should</em> really read the &#39;Where did everything go in Puppet 4.x?&#39; <em>more</em> than once! :-)</p>
+
+<p>e.g. the troclarc.yaml is now located at /etc/puppetlabs/puppet/troclarc.yaml</p>
+
+<h2>strict_variables = true / agent upgrades</h2>
+
+<p>Puppet Agent 3.8 can talk to Puppet Server, but not to Puppet 4.x Master (passenger setup). The Passenger setup will be removed at Puppet 5.0, so you have to upgrade to
+Puppet Server anyway. Do it early it will save you a lot of time. </p>
+
+<p>While using Puppet Agent 3.8 we can&#39;t use all the new features of Puppet 4.x because of the older client. We are planing to upgrade to Puppet 4.6 Agents as soon as possible.
+But we are not going to use the AIO packages, we will use the backports of the Debian Package, because we don&#39;t need that bloated package on all our servers. (We don&#39;t use PXP or Mcollective, just the Puppet Agent)</p>
+
+<p>After switching the agents to Puppet 4.x we will work on strict_variables = true to ensure that we are ready to upgrade to Puppet 5.0. (We think the update from 4.x to 5.0 will
+be less pain then 3.x to 4.0)</p>
+
+<p>So folks: DO THE UPGRADE to Puppet 4.x it&#39;s worth it!</p>
+
+</div>
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Jonas Genannt<br />
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                <a href="https://github.com/hggh">github.com/hggh</a><br />
+                <a href="https://twitter.com/hggh_">twitter.com/hggh_</a><br />
+              </p>
+            </div>
+          </div>
+        </div>
+    <script src="/js/jquery-1.11.0.min.js"></script>
+    <script src="/js/lightbox.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    </body>
+</html>

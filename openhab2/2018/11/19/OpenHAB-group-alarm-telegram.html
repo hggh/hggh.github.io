@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base href="https://hggh.github.io">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>OpenHAB2 - temperature alarm via groups and a Telegram bot</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/main.css">
+
+        <link rel="stylesheet" href="/css/lightbox.css">
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">home</a></h1>
+          </div>
+
+          <h2>OpenHAB2 - temperature alarm via groups and a Telegram bot</h2>
+<p class="meta">19 Nov 2018</p>
+
+<div class="post">
+<p><a href="https://openhab.org">OpenHAB2</a> is a great tool. I have a several BME280 inside my flat. They are monitoring my sleeping room, living room and my kitchen.</p>
+
+<div class="image-row"><div class="image-set"><a class="image-link" href="/images/openhab2-telegram/telegram.jpg" data-lightbox="images/openhab2-telegram"><img class="image-thumb" src="/images/openhab2-telegram/telegram_thumb.jpg"/></a></div></div>
+
+<p>This is my <code>items</code> configuration:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java">Group indoor_temperature
+Number:Temperature BME280_52_Temperature &quot;Temperatur Indoor [%.1f °C]&quot; &lt;temperature&gt; (indoor_temperature) {expire=&quot;90m, 0&quot;}
+Number:Temperature BME280_54_Temperature &quot;Temperatur Indoor [%.1f °C]&quot; &lt;temperature&gt;  (indoor_temperature) {expire=&quot;90m, 0&quot;}</code></pre></figure>
+
+<p>The <strong>idea</strong> was to <strong>send</strong> me a Telegram message if the temperature is <strong>blow</strong> a certain <strong>threshold</strong>.</p>
+
+<p>Since I&#39;m a lazy guy, I do <strong>not</strong> like to configure a <strong>new rule for every sensor</strong>. That&#39;s why I build a alerting feature via groups.</p>
+
+<p>The idea was that the threshold could be configured via the <code>items</code> file or with a input box on my sitemap.</p>
+
+<p>To work with groups I had to create two new groups to group the <code>Switch Item</code> if the alarm is active and the threshold of every sensor:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java">Group indoor_temperature_alarm
+Group indoor_temperature_alarm_threshold</code></pre></figure>
+
+<p>For every temperature sensor I need a Switch Item and a String Item that hold the information:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java">Switch BME280_54_Temperature_Alarm &quot;Küche Temperaturalarm&quot; (indoor_temperature_alarm)
+String BME280_54_Temperature_Alarm_Threshold &quot;18&quot; (indoor_temperature_alarm_threshold)</code></pre></figure>
+
+<p>We have <strong>set</strong> the threshold for the <strong>kitchen at 18°C</strong>!</p>
+
+<p>At first we need a rule to set the alarm switch on and off:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java">rule &quot;indoor_temperature below&quot;
+when
+    Member of indoor_temperature received update
+then
+    var item_name_alarm = triggeringItem.name + &#39;_Alarm&#39;
+    var item_name_alarm_threshold = item_name_alarm + &#39;_Threshold&#39;
+    var threshold_item = indoor_temperature_alarm_threshold.members.findFirst[name.equals(item_name_alarm_threshold)]
+
+    var QuantityType&lt;Temperature&gt; threshold_value = new QuantityType(threshold_item.label + &quot;°C&quot;)
+
+    if (triggeringItem.state &lt; threshold_value ) {
+        sendCommand(item_name_alarm, &quot;ON&quot;)
+    }
+    else {
+        sendCommand(item_name_alarm, &quot;OFF&quot;)
+    }
+end</code></pre></figure>
+
+<p>Now the state of the alarm is set to the Switch Item of every sensor. Let&#39;s now send a Telegram message:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js">rule &quot;indoor_temperature_alarm changed&quot;
+when
+    Member of indoor_temperature_alarm changed
+then
+    var item_name = triggeringItem.name
+
+    var item_name_of_value = item_name.substring(0, triggeringItem.name.lastIndexOf(&#39;_&#39;))
+    var temperature_Item = indoor_temperature.members.findFirst[name.equals(item_name_of_value)]
+
+    logInfo(&quot;TemperatureAlarm&quot;, item_name)
+    logInfo(&quot;TemperatureAlarm&quot;, &quot;Item Name of the value &quot; + item_name_of_value +  &quot;Value:&quot; + temperature_Item.state.toString)
+
+    var message = &quot;&quot;
+
+    if (triggeringItem.state == ON) {
+        message = triggeringItem.label + &quot;: Temperatur zu niedrig: &quot; + temperature_Item.state.toString
+    }
+    else {
+        message = triggeringItem.label + &quot;: Temperatur wieder normal: &quot; + temperature_Item.state.toString
+    }
+
+    sendTelegram(&quot;hggh&quot;, message)
+end</code></pre></figure>
+
+</div>
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Jonas Genannt<br />
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                <a href="https://github.com/hggh">github.com/hggh</a><br />
+                <a href="https://twitter.com/hggh_">twitter.com/hggh_</a><br />
+              </p>
+            </div>
+          </div>
+        </div>
+    <script src="/js/jquery-1.11.0.min.js"></script>
+    <script src="/js/lightbox.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    </body>
+</html>

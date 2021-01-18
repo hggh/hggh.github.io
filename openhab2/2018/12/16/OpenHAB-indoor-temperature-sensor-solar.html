@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base href="https://hggh.github.io">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>OpenHAB2 - solar low power BME280 wireless sensor with RFM69</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/main.css">
+
+        <link rel="stylesheet" href="/css/lightbox.css">
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">home</a></h1>
+          </div>
+
+          <h2>OpenHAB2 - solar low power BME280 wireless sensor with RFM69</h2>
+<p class="meta">16 Dec 2018</p>
+
+<div class="post">
+<p>The idea was to create a low power wireless sensor for monitoring</p>
+
+<ul>
+<li>temperature</li>
+<li>humidity</li>
+<li>air pressure</li>
+</ul>
+
+<p>inside my flat without a power supply or a battery.</p>
+
+<p>The last 90 days the sensor is pretty stable and uses two 3V solar panels mounted with the 3d printed case on my window (inside).</p>
+
+<div class="image-row"><div class="image-set"><a class="image-link" href="/images/solar-case/solar-holder.jpg" data-lightbox="images/solar-case"><img class="image-thumb" src="/images/solar-case/solar-holder_thumb.jpg"/></a><a class="image-link" href="/images/solar-case/openhab.jpg" data-lightbox="images/solar-case"><img class="image-thumb" src="/images/solar-case/openhab_thumb.jpg"/></a></div></div>
+
+<p>A small wire is connected to the pcb of the sensor. The wire from the solar panel is connected to a diode.
+So the current can only flow from the solar panel into the super cap. After the diode there is a SuperCap (5.5V 1.5F).</p>
+
+<div class="image-row"><div class="image-set"><a class="image-link" href="/images/solar-bme-pcb-supercap/pcb.jpg" data-lightbox="images/solar-bme-pcb-supercap"><img class="image-thumb" src="/images/solar-bme-pcb-supercap/pcb_thumb.jpg"/></a></div></div>
+
+<ul>
+<li>the blue wire is the antenna of the RFM69 chip.</li>
+<li>the small second pcb is the breakout board of the BME280.</li>
+<li>the supercap (buttom) is connected via the two wires to the pcb.</li>
+<li>the white connector (top) is the connection to the solar panel on the window</li>
+</ul>
+
+<p>No voltage regulator is used - the Amtel 328P-AU is running on 1MHZ and BOD is disabled.</p>
+
+<div class="image-row"><div class="image-set"><a class="image-link" href="/images/solar-bme-voltage-grafana/solar.jpg" data-lightbox="images/solar-bme-voltage-grafana"><img class="image-thumb" src="/images/solar-bme-voltage-grafana/solar_thumb.jpg"/></a></div></div>
+
+<p>The sensor reads the BME280 every 30 minutes and sends the values via RFM96 to the gateway. The gateway sends it via serial console into OpenHAB2.</p>
+
+<p>To monitor the voltage, the sensor reads every hour the voltage from the supercap and sends it to OpenHAB2. </p>
+
+<p>After sunset the power from the supercap is used. Also the device stays stable if there is no sunlight at all for three days.</p>
+
+<p>Source code/pcb/stl is located at Github: <a href="https://github.com/hggh/indoor-temperature-sensor">https://github.com/hggh/indoor-temperature-sensor</a></p>
+
+<p>A CR2032 battery can also be used. I used it to test the sensor before switching to solar panels. I have now two solar powered sensors.</p>
+
+</div>
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Jonas Genannt<br />
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                <a href="https://github.com/hggh">github.com/hggh</a><br />
+                <a href="https://twitter.com/hggh_">twitter.com/hggh_</a><br />
+              </p>
+            </div>
+          </div>
+        </div>
+    <script src="/js/jquery-1.11.0.min.js"></script>
+    <script src="/js/lightbox.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base href="https://hggh.github.io">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Jekyll plugin for Lightbox2 with thumbnails</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/main.css">
+
+        <link rel="stylesheet" href="/css/lightbox.css">
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">home</a></h1>
+          </div>
+
+          <h2>Jekyll plugin for Lightbox2 with thumbnails</h2>
+<p class="meta">02 Dec 2014</p>
+
+<div class="post">
+<p><a href="http://lokeshdhakar.com/projects/lightbox2/">lightbox2</a> with Jekyll. I have written a <a href="https://github.com/hggh/hggh.github.io/blob/jekll/_plugins/image_gallery_tag.rb">small plugin</a> for Jekyll.</p>
+
+<p>It will generate the thumbs and create the html for lightbox. You can embed image gallery into your post, only with</p>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">{% imagegallery images/foobar %}
+</code></pre></figure>
+<p>this will generate a lightbox gallery with all images from images/foobar.</p>
+
+<p>See it here:</p>
+
+<div class="image-row"><div class="image-set"><a class="image-link" href="/images/test-gallery/DSCN0019.JPG" data-lightbox="images/test-gallery"><img class="image-thumb" src="/images/test-gallery/DSCN0019_thumb.JPG"/></a><a class="image-link" href="/images/test-gallery/DSCN0018.JPG" data-lightbox="images/test-gallery"><img class="image-thumb" src="/images/test-gallery/DSCN0018_thumb.JPG"/></a></div></div>
+
+</div>
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Jonas Genannt<br />
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                <a href="https://github.com/hggh">github.com/hggh</a><br />
+                <a href="https://twitter.com/hggh_">twitter.com/hggh_</a><br />
+              </p>
+            </div>
+          </div>
+        </div>
+    <script src="/js/jquery-1.11.0.min.js"></script>
+    <script src="/js/lightbox.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base href="https://hggh.github.io">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ESP32 S2 WROOM pinout reference</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/main.css">
+
+        <link rel="stylesheet" href="/css/lightbox.css">
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">home</a></h1>
+          </div>
+
+          <h2>ESP32 S2 WROOM pinout reference</h2>
+<p class="meta">06 Jan 2021</p>
+
+<div class="post">
+<p>special (possible not usable) pins on ESP32 S2 WROOM:
+<pre>
++---------+----------+----+
+| Name | function | note |
++=====+==========+======+
+| IO  0 | RTC<em>GPIO0, GPIO0 | boot option |
+| IO  2 | ?no output to high? | |
+| IO  5 | ?no input? | |
+| IO 15 | RTC</em>GPIO15, GPIO15, U0RTS, ADC2<em>CH4, XTAL</em>32K<em>P | optional external 32.768KHz crystal | 
+| IO 16 | RTC</em>GPIO16, GPIO16, U0CTS, ADC2<em>CH5, XTAL</em>32K<em>N | optional external 32.768KHz crystal |
+| IO 18 | RTC</em>GPIO18, GPIO18, U1RXD, ADC2<em>CH7, DAC</em>2, CLK<em>OUT3 | pullup with VDD, my affect chip&#39;s entry into download boot mode |
+| IO 19 | RTC</em>GPIO19, GPIO19, U1RTS, ADC2<em>CH8, CLK</em>OUT2, USB<em>D- | USB OTG |
+| IO 20 | RTC</em>GPIO20, GPIO20, U1CTS, ADC2<em>CH9, CLK</em>OUT1, USB_D+ | USB OTG |
+| IO 26 | SPICS1, GPIO26 | internal PSRAM connection, not usable |
+| IO 45 | GPIO45 | strapping pin, see datasheet |
+| IO 46 | GPIO46 | Input only, strapping pin, see datasheet |
++---------+----------+----+
+</pre></p>
+
+</div>
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Jonas Genannt<br />
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                <a href="https://github.com/hggh">github.com/hggh</a><br />
+                <a href="https://twitter.com/hggh_">twitter.com/hggh_</a><br />
+              </p>
+            </div>
+          </div>
+        </div>
+    <script src="/js/jquery-1.11.0.min.js"></script>
+    <script src="/js/lightbox.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    </body>
+</html>

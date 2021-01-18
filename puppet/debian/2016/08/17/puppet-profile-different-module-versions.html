@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base href="https://hggh.github.io">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Puppet - profiles with support of different module versions</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/main.css">
+
+        <link rel="stylesheet" href="/css/lightbox.css">
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">home</a></h1>
+          </div>
+
+          <h2>Puppet - profiles with support of different module versions</h2>
+<p class="meta">17 Aug 2016</p>
+
+<div class="post">
+<p>At Globalways we are using the profile / roles layout for our puppet infrastructure.</p>
+
+<p>The profiles are shared all over our different customer environments - so we have one place for our profiles.</p>
+
+<p>This is a good solution until you need to support different module versions. But with Puppet future 
+parser it is getting better.</p>
+
+<p>Our example is the tomcat module from PuppetLabs. With the version 1.5.0 there is new option &#39;manage_service&#39;.</p>
+
+<p>The code before supporting 1.5.0 looks like:</p>
+
+<div class="highlight"><pre><code class="language-puppet" data-lang="puppet"># install and prepare default tomcat instance
+tomcat::instance { &#39;default7&#39;:
+  package_name   =&gt; &#39;tomcat7&#39;,
+  catalina_home  =&gt; &#39;/var/lib/tomcat7&#39;,
+  package_ensure =&gt; $package_ensure,
+}</code></pre></div>
+
+<p>If the environment is using version 1.5.0 or greater the manage_service option should be false for our needs.</p>
+
+<div class="highlight"><pre><code class="language-puppet" data-lang="puppet">$metadata = load_module_metadata(&#39;tomcat&#39;, true)
+if (versioncmp($metadata[&#39;version&#39;], &#39;1.5.0&#39;) &gt;= 0) {
+  $tomcat_options = {
+    &#39;manage_service&#39; =&gt; false,
+  }
+}
+else {
+  $tomcat_options = {}
+}
+# install and prepare default tomcat instance
+tomcat::instance { &#39;default7&#39;:
+  package_name   =&gt; &#39;tomcat7&#39;,
+  catalina_home  =&gt; &#39;/var/lib/tomcat7&#39;,
+  package_ensure =&gt; $package_ensure,
+  *              =&gt; $tomcat_options,
+}</code></pre></div>
+
+<p>We are reading the module version with the stdlib function and then using a future parser option, to use a hash as options for the define.</p>
+
+<p>We are now able to support more versions of the tomcat module within one profile.</p>
+
+</div>
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Jonas Genannt<br />
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                <a href="https://github.com/hggh">github.com/hggh</a><br />
+                <a href="https://twitter.com/hggh_">twitter.com/hggh_</a><br />
+              </p>
+            </div>
+          </div>
+        </div>
+    <script src="/js/jquery-1.11.0.min.js"></script>
+    <script src="/js/lightbox.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    </body>
+</html>

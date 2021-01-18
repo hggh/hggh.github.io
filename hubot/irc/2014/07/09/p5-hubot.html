@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base href="https://hggh.github.io">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>p5-hubot - a Hubot in Perl</title>
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/main.css">
+
+        <link rel="stylesheet" href="/css/lightbox.css">
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">home</a></h1>
+          </div>
+
+          <h2>p5-hubot - a Hubot in Perl</h2>
+<p class="meta">09 Jul 2014</p>
+
+<div class="post">
+<p><a href="https://github.com/aanoaa/p5-hubot">p5-hubot</a> is a Hubot written in Perl with <a href="http://search.cpan.org/%7Emlehmann/AnyEvent/lib/AnyEvent.pm">AnyEvent</a>. The original <a href="https://github.com/github/hubot">Hubot</a> is from Github written in NodeJS.</p>
+
+<p>We are using IRC for internal communication at Internetstores. IRC Service is provided by <a href="http://www.inspircd.org/">InspIRCd</a> with GnuTLS and authentication.</p>
+
+<p>p5-hubot is the bot in our IRC channel. p5-hubot provides some basic plugins:</p>
+
+<ul>
+<li>ascii</li>
+<li>help</li>
+<li>roles</li>
+<li>shorten</li>
+<li>tweet</li>
+</ul>
+
+<p>There is also an additional repository with more plugins called <a href="https://github.com/aanoaa/p5-hubot-scripts">p5-hubot-scripts</a>.</p>
+
+<h1>we are using the following plugins</h1>
+
+<ul>
+<li>help</li>
+</ul>
+
+<p>plugin from p5-hubot core. displays contents of perldoc from every plugin.</p>
+
+<ul>
+<li>sayhttpd</li>
+</ul>
+
+<p>plugin from p5-hubot-scripts repository. This plugin provides a HTTP API. You can use curl to post any message to your IRC Channel:</p>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">curl -X POST -d &#39;{&quot;room&quot;: &quot;#test-channel&quot;, &quot;secret&quot;: &quot;foobar&quot;, &quot;message&quot;: &quot;Hello from JSON&quot; }&#39; http://localhost:8080/hubot/say
+</code></pre></figure>
+<ul>
+<li>running</li>
+</ul>
+
+<p>this is a internal plugin. we can query running versions of your software in production.</p>
+
+<ul>
+<li>rules</li>
+</ul>
+
+<p>plugin from p5-hubot core. displays the rules of the robot.</p>
+
+<ul>
+<li>jira</li>
+</ul>
+
+<p>plugin from p5-hubot-scripts repository. This plugin shows newly created issues from JIRA in our channel</p>
+
+<ul>
+<li>lessthanthree</li>
+</ul>
+
+<p>plugin from p5-hubot-scripts repository. It provides some love to you :)</p>
+
+<h3>our p5-hubot in action</h3>
+
+<p><br/></p>
+
+<h2>Nagios/Icinga</h2>
+
+<p>Icinga uses <strong>sayhttpd</strong> to inform channel users about service/host problems:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">&lt; isbot&gt; NAGIOS: PROBLEM Service: CPU Load www5 State: CRITICAL : Fri May 2 10:20:58 CEST 2014 Additional Info: CRITICAL - load average: 162.97, 75.99, 30.61</code></pre></figure>
+
+<p><br/></p>
+
+<h2>Git</h2>
+
+<p>Our Git <code>post-receive</code> hook sends commit messages with the repository name into the channel with the <strong>sayhttpd</strong> plugin:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">&lt; isbot&gt; Git: [puppet] push commit: Jonas Genannt (5ec6b27) added logrotate for image downloader</code></pre></figure>
+
+<p><br/></p>
+
+<h2>Query running version from production</h2>
+
+<p>We are using git tags to deploy our software with MCollective to our servers. The <strong>running</strong> plugin allows you to get the running version from production:
+(this plugin is not available for download)</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">&lt; hggh&gt; isbot: running? prod/isCommerce
+&lt; isbot&gt; hggh: We have running: prod/2014-07-02_d2</code></pre></figure>
+
+<p><br/></p>
+
+<h2>JIRA notifications</h2>
+
+<p>We are using JIRA for our issues. If a new issue in JIRA is created, the new issue will be displayed in our IRC channel. It is using the <strong>jira</strong> plugin.
+You need to enable Webhooks in JIRA, have a look at my inline doc from the jira plugin.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">&lt; isbot&gt; JIRA Issue Jonas Genannt created SUP-2479 with mobile checkout form validation</code></pre></figure>
+
+<p><br/></p>
+
+<h2>some love</h2>
+
+<p>The <strong>lessthanthree</strong> plugin provides some love to you:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">&lt; hggh&gt; isbot: &lt;3
+&lt; isbot&gt; hggh: &lt;3 you too! http://youtu.be/4iHWZRqSTQ4</code></pre></figure>
+
+<p><br/></p>
+
+<p>We have fun with our p5-hubot! - try it yourself! :)</p>
+
+</div>
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Jonas Genannt<br />
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                <a href="https://github.com/hggh">github.com/hggh</a><br />
+                <a href="https://twitter.com/hggh_">twitter.com/hggh_</a><br />
+              </p>
+            </div>
+          </div>
+        </div>
+    <script src="/js/jquery-1.11.0.min.js"></script>
+    <script src="/js/lightbox.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    </body>
+</html>
